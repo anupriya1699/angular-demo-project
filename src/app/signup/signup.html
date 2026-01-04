@@ -1,0 +1,40 @@
+<div class="signup-container space-y-6">
+    <div class="border rounded-2xl p-4 max-w-[600px] min-w-[400px] mx-auto items-center justify-center space-y-4">
+        <p class="text-2xl font-bold text-center">Signup</p>
+        <form [formGroup]="userRegisterForm">
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+            <input type="text" id="name" name="name"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Your Name" formControlName="name"
+                [ngClass]="{'border-red-500': userRegisterForm.get('name')?.errors && userFormError}">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+            <input type="text" id="email" name="email"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Your email" formControlName="email"
+                [ngClass]="{'border-red-500' : userRegisterForm.get('email')?.errors && userFormError}">
+            <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+                number</label>
+            <input type="text" id="mobile" name="mobile" numeric
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Your Phone number" formControlName="mobile"
+                [ngClass]="{'border-red-500' : userRegisterForm.get('mobile')?.errors && userFormError}">
+            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+            <input type="text" id="city" name="city"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Your City" formControlName="city"
+                [ngClass]="{'border-red-500' : userRegisterForm.get('city')?.errors && userFormError}">
+            <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
+            <input type="text" id="age" name="age"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Your Age" formControlName="age" numeric
+                [ngClass]="{'border-red-500' : userRegisterForm.get('age')?.errors && userFormError}">
+            <div class="flex gap-4 justify-end">
+                <button type="submit" class="{{cssService.primaryButtonClass}}" (click)="register()"
+                    [disabled]="userRegisterForm.invalid">Register</button>
+                <button type="button" class="{{cssService.secondaryButtonClass}}" (click)="reset()"
+                    [disabled]="userRegisterForm.invalid">Reset</button>
+            </div>
+        </form>
+        <p class="text-center text-sm text-gray-500">Already have an account? <a href="/login">Login</a></p>
+    </div>
+</div>

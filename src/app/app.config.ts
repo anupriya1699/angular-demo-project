@@ -2,10 +2,17 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { LUCIDE_ICONS, Search } from 'lucide-angular/src/icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+    provideRouter(routes),
+    {
+      provide: LUCIDE_ICONS,
+      useValue: {
+        Search,
+      },
+    },
+  ],
 };

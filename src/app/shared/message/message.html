@@ -1,0 +1,12 @@
+<div class="p-6 space-y-6 rounded-lg">
+    <p class="text-center">{{data.message}}</p>
+
+    @if (data.purpose === 'delete') {
+    <button (click)="confirm()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Yes</button>
+
+    <button (click)="cancel()" class="bg-red-500 text-white px-4 py-2 rounded-lg">No</button>
+    }
+    @else if (data.purpose === 'success') {
+    <button (click)="confirm()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">OK</button>
+    }
+</div>

@@ -1,0 +1,59 @@
+<div class="space-y-6 border-2 border-gray-300 rounded-lg p-4">
+    <p class="text-2xl font-bold text-center">Add Store</p>
+    <div class="flex flex-col gap-2">
+        <p>User id: {{data?.id}}</p>
+        <p>User name: {{data?.name}}</p>
+        <p>User email: {{data?.email}}</p>
+        <p>User phone: {{data?.phone}}</p>
+        <p>User userType: {{data?.userType}}</p>
+    </div>
+    <form [formGroup]="storeForm" class="space-y-4">
+        <div class="flex items-center gap-2">
+            <table class="w-full">
+                <thead>
+                    <tr class="space-x-2">
+                        <th>Sr. No.</th>
+                        <th>Store Name</th>
+                        <th>Store Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container formArrayName="storeDetail">
+                        @for (store of storeDetailGet?.controls; track $index) {
+                        <tr class="space-x-2" [formGroupName]="$index">
+                            <td class="px-2">{{ $index + 1 }}</td>
+                            <td class="px-2">
+                                <input type="text" id="name" name="name"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    formControlName="name" placeholder="Store Name"
+                                    [ngClass]="{'border-red-500': store.get('name')?.errors && storeFormError}">
+                            </td>
+                            <td class="px-2">
+                                <input type="text" id="location" name="location"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    formControlName="location" placeholder="Store Location"
+                                    [ngClass]="{'border-red-500': store.get('location')?.errors && storeFormError}">
+                            </td>
+                            <td class="px-2">
+                                @if (isLastIndex($index)) {
+                                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                                    (click)="addStoreDataForm()">+</button>
+                                }
+
+                                @if (!isFirstIndex()) {
+                                <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg"
+                                    (click)="deleteStoreDataForm($index)">Delete</button>
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg" (click)="submitForm()">Submit</button>
+        <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg" (click)="closeForm()">Close</button>
+    </form>
+</div>

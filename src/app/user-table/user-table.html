@@ -1,0 +1,61 @@
+<div class="p-6 space-y-6 border-2 border-gray-300 rounded-md">
+    <div class="flex justify-end">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md " (click)="openUserForm()">Add User</button>
+    </div>
+    <table class="w-full">
+        <thead>
+            <tr class="border-b-2 border-gray-300">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>User Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of usersData(); track user?.id) {
+            <tr class="text-center border-b-2 border-gray-300">
+                <td>{{ user?.id }}</td>
+                <td>{{ user?.name }}</td>
+                <td>{{ user?.email }}</td>
+                <td>{{ user?.phone }}</td>
+                <td>{{ user?.userType }}</td>
+                <td class="flex justify-center gap-2">
+                    <button (click)="editUser(user)" class="text-blue-500">Edit</button>
+                    <button (click)="deleteUser(user?.id)" class="text-red-500">Delete</button>
+                    <button (click)="openStoreForm(user)" class="text-green-500">Add Store</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <mat-accordion>
+        @for (user of usersData(); track user?.id) {
+        <mat-expansion-panel (opened)="onPanelOpened(user?.id)" (closed)="onPanelClosed()">
+            <mat-expansion-panel-header>
+                <mat-panel-title> {{user?.name}} </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <table class="w-full">
+                <thead>
+                    <tr>
+                        <th>Store Name</th>
+                        <th>Store Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (store of userStoreDetails(); track store?.id) {
+                    <tr class="text-center border-b-2 border-gray-300">
+                        <td>{{store?.name}}</td>
+                        <td>{{store?.location}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </mat-expansion-panel>
+        }
+    </mat-accordion>
+</div>
